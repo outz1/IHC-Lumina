@@ -1,7 +1,7 @@
 ## PARA RODAR O PROJETO, NO TERMINAL, NA PASTA IHC-Lumina:
 
 ```
-clone o repositorio github
+Clone o repositorio github
 -> git clone https://github.com/outz1/IHC-Lumina
 
 Baixar as dependencias
