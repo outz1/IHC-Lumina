@@ -1,0 +1,340 @@
+@import "tailwindcss";
+
+/* Tokens da interface (cores e medidas do protótipo legado) */
+:root {
+  --blue: #7490eb;
+  --blue-dark: #5f7ce0;
+  --ink: #2b2b2b;
+  --field: #eeeeee;
+  --muted: #8a8a8a;
+  --card-radius: 30px;
+  --transition-ms: 500ms; /* duração de cada etapa da transição entre telas */
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  font-family: "Poppins", sans-serif;
+  color: var(--ink);
+  background: linear-gradient(90deg, #dfe0e4 0%, #dfe0e4 45%, #cdd5f3 100%);
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- Card ---------- */
+.card {
+  position: relative;
+  width: min(900px, 100%);
+  height: 520px;
+  overflow: hidden;
+  border-radius: var(--card-radius);
+  background: #fff;
+  box-shadow: 0 20px 50px rgb(60 70 120 / 0.18);
+}
+
+/* ---------- Formulários ---------- */
+.form-pane {
+  position: absolute;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 52px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 300ms ease;
+}
+
+.form-pane.login {
+  right: 0;
+}
+
+.form-pane.signup {
+  left: 0;
+}
+
+.form-pane.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.form-title {
+  margin: 0 0 28px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.form-pane form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap input {
+  width: 100%;
+  height: 48px;
+  padding: 0 46px 0 16px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: var(--field);
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 200ms, background 200ms;
+}
+
+.input-wrap input::placeholder {
+  color: var(--muted);
+}
+
+.input-wrap input:focus {
+  border-color: var(--blue);
+  background: #fff;
+}
+
+.input-wrap svg {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 16px;
+  height: 16px;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.forgot {
+  align-self: center;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 0.75rem;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  height: 44px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--blue);
+  color: #fff;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgb(116 144 235 / 0.35);
+  transition: background 200ms, transform 150ms;
+}
+
+.btn-primary:hover {
+  background: var(--blue-dark);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.form-status {
+  min-height: 1.2em;
+  margin: 0;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--blue-dark);
+}
+
+/* ---------- Painel azul deslizante ---------- */
+.panel {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background: var(--blue);
+  color: #fff;
+  transition:
+    left var(--transition-ms) cubic-bezier(0.65, 0, 0.35, 1),
+    width var(--transition-ms) cubic-bezier(0.65, 0, 0.35, 1),
+    height var(--transition-ms) cubic-bezier(0.65, 0, 0.35, 1),
+    border-radius var(--transition-ms) cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.panel.login {
+  left: 0;
+  width: 45%;
+  border-radius: var(--card-radius) 150px 150px var(--card-radius);
+}
+
+.panel.signup {
+  left: 55%;
+  width: 45%;
+  border-radius: 150px var(--card-radius) var(--card-radius) 150px;
+}
+
+/* Estado intermediário: o painel cobre o card inteiro */
+.panel.cover {
+  left: 0;
+  width: 100%;
+  border-radius: var(--card-radius);
+}
+
+.panel-content {
+  width: 100%;
+  padding: 0 32px;
+  opacity: 1;
+  transition: opacity 250ms ease 150ms;
+}
+
+.panel.cover .panel-content {
+  opacity: 0;
+  transition-delay: 0ms;
+}
+
+.panel-title {
+  margin: 0 0 14px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.panel-text {
+  margin: 0 0 14px;
+  font-size: 0.75rem;
+}
+
+.panel.signup .panel-content {
+  text-align: center;
+}
+
+.panel.login .panel-content .panel-text,
+.panel.login .panel-content .btn-ghost {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.panel.login .panel-content .panel-text {
+  text-align: center;
+}
+
+.btn-ghost {
+  display: block;
+  width: 130px;
+  height: 40px;
+  border: 1.5px solid #fff;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 200ms, color 200ms;
+}
+
+.panel.signup .btn-ghost {
+  margin: 0 auto;
+}
+
+.btn-ghost:hover {
+  background: #fff;
+  color: var(--blue-dark);
+}
+
+.btn-ghost:disabled {
+  cursor: wait;
+}
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 720px) {
+  .card {
+    height: 680px;
+  }
+
+  .form-pane {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 66%;
+    padding: 0 28px;
+  }
+
+  .form-pane.login,
+  .form-pane.signup {
+    left: 0;
+    right: 0;
+  }
+
+  .form-title {
+    font-size: 1.7rem;
+    margin-bottom: 20px;
+  }
+
+  .panel.login,
+  .panel.signup {
+    left: 0;
+    width: 100%;
+    height: 34%;
+    justify-content: center;
+    border-radius: var(--card-radius) var(--card-radius) 80px 80px;
+  }
+
+  .panel.cover {
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--card-radius);
+  }
+
+  .panel-content {
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .panel-title {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+
+  .btn-ghost {
+    margin: 0 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .panel-content,
+  .form-pane {
+    transition-duration: 1ms;
+  }
+}
