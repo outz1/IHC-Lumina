@@ -1,9 +1,13 @@
-PARA RODAR O PROJETO, NO TERMINAL, NA PASTA IHC-Lumina:
+## PARA RODAR O PROJETO, NO TERMINAL, NA PASTA IHC-Lumina:
 
-npm install
+```npm install
 
 npm run dev
+```
+### O RELATÓRIO
+- presente em relatorio-prompts-interface.pdf
 
+### ONDE VER O PROJETO?
 O projeto roda em http://localhost:8443/
 
 Arquivos principais:
