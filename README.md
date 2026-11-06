@@ -1,9 +1,14 @@
 ## PARA RODAR O PROJETO, NO TERMINAL, NA PASTA IHC-Lumina:
 
 ```
-npm install
+clone o repositorio github
+-> git clone https://github.com/outz1/IHC-Lumina
 
-npm run dev
+Baixar as dependencias
+-> npm install
+
+Rodar o script
+-> npm run dev
 ```
 ### O RELATÓRIO
 Presente em relatorio-prompts-interface.pdf
